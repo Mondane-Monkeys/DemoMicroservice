@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, render_template, Response
+from flask import Flask, jsonify, render_template, request
 import requests
 import argparse
 import os
@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 DEFAULT_PORT = 8080
 ENVIRONMENT_VAR_NAME_PORT = 'WEBAPP_PORT'
-USERS_SERVICE_ADDRESS = 'users-service' #'localhost:50001' OR k8s 'users-service'
+ACCOUNTS_SERVICE_ADDRESS = 'http://users:8080' #raw python -p 50000:'localhost:50001';  k8s 'users-service'
 
 def get_port():
     parser = argparse.ArgumentParser(description='A Flask app that renders and returns webapp pages')
@@ -31,14 +31,10 @@ def index():
    # file_path = os.path.join(os.path.dirname(__file__), 'app', 'login.html')
    return render_template('login.html')
 
-@app.route('/login', methods=['POST'])
-def login():
-   external_response = requests.post(f'http://{USERS_SERVICE_ADDRESS}/login', json=request.json)
-   
-   content = external_response.content
-   status_code = external_response.status_code
-   
-   return Response(content, status=status_code, content_type=external_response.headers.get('Content-Type'))
+# @app.route('/login', methods=['POST'])
+# def login():
+#    external_response = requests.post(f'{ACCOUNTS_SERVICE_ADDRESS}/login', json=({'username':request.json['password'], 'password':request.json['password']}))
+#    return external_response.json()
 
 if __name__ == '__main__':
     port = get_port()

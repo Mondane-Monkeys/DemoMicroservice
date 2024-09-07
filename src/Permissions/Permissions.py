@@ -24,7 +24,7 @@ def get_port():
     
     return DEFAULT_PORT
 
-@app.route('/')
+@app.route('/permissions/', methods=['GET'])
 def index():
     response = {
         "message": "Hello, World From Permissions",

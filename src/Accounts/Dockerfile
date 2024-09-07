@@ -7,4 +7,4 @@ RUN pip install -r requirements.txt
 COPY . .
 
 EXPOSE 8080
-CMD ["python", "Users.py"]
+CMD ["python", "Accounts.py"]
