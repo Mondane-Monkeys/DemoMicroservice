@@ -24,6 +24,8 @@
    - This may take a while to download all dependancies and images
 6) Run `docker compose -f demo-app.yaml up -d`
    - This will start all the microservices, you should see an output like:
+7) Browse to localhost:8089 to see it in action
+   - The default un&pw is "admin"
 ```
  [+] Running 7/7
  ✔ Container docker-compose-accounts-1       Started 
