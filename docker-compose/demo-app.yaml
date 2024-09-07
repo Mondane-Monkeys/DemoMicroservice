@@ -26,3 +26,50 @@ services:
     build: ../src/Webapp
     ports:
       - 50000:8080
+
+  mongo:
+    image: mongo
+    environment:
+      # - MONGO_INITDB_ROOT_USERNAME=/run/secrets/MONGO_ROOT_USER
+      # - MONGO_INITDB_ROOT_PASSWORD=/run/secrets/MONGO_ROOT_PASSWORD
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+      - MONGO_INITDB_DATABASE=project
+    # secrets:
+    #   - MONGO_ROOT_USER
+    #   - MONGO_ROOT_PASSWORD
+      
+  mongo-express:
+    image: mongo-express
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN=false
+      - ME_CONFIG_MONGODB_AUTH_DATABASE=admin
+      - ME_CONFIG_MONGODB_AUTH_USERNAME=root
+      - ME_CONFIG_MONGODB_AUTH_PASSWORD=root
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=admin
+      # - ME_CONFIG_MONGODB_AUTH_USERNAME=/run/secrets/MONGO_ROOT_USER
+      # - ME_CONFIG_MONGODB_AUTH_PASSWORD=/run/secrets/MONGO_ROOT_PASSWORD
+      # - ME_CONFIG_BASICAUTH_USERNAME=/run/secrets/MONGOEXPRESS_LOGIN
+      # - ME_CONFIG_BASICAUTH_PASSWORD=/run/secrets/MONGOEXPRESS_PASSWORD
+    depends_on:
+      - mongo
+    ports:
+    - "8888:8081"
+    # secrets:
+    #   - MONGO_ROOT_USER
+    #   - MONGO_ROOT_PASSWORD
+    #   - MONGOEXPRESS_LOGIN
+    #   - MONGOEXPRESS_PASSWORD
+
+# secrets:
+#   MONGO_ROOT_USER:
+#     file: .configs/MONGO_ROOT_USER.secret
+#   MONGO_ROOT_PASSWORD:
+#     file: .configs/MONGO_ROOT_PASSWORD.secret
+#   MONGOEXPRESS_LOGIN:
+#     file: .configs/MONGOEXPRESS_LOGIN.secret
+#   MONGOEXPRESS_PASSWORD:
+#     file: .configs/MONGOEXPRESS_PASSWORD.secret
