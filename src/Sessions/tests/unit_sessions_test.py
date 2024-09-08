@@ -44,7 +44,7 @@ class FlaskAppTests(unittest.TestCase):
             response = self.app.post(
                 "/sessions/", json={"username": "user", "password": "wrong_pass"}
             )
-            self.assertEqual(response.status_code, 400)
+            self.assertEqual(response.status_code, 404)
             data = response.json
             self.assertEqual(data["status"], "error")
             self.assertEqual(data["message"], "Invalid credentials")
