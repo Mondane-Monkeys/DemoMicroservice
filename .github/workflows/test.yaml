@@ -1,4 +1,4 @@
-name: CI
+name: UnitTests
 
 on:
   push:
@@ -25,10 +25,27 @@ jobs:
         with:
           python-version: '3.x' # Adjust to your Python version
 
-      - name: Install dependencies and test
+      - name: Accounts - Install dependencies and test
         run: | 
           cd src
           cd Accounts
           pip install pytest
           pip install -r requirements.txt
           python -m pytest
+      
+      - name: Permissions - Install dependencies and test
+        run: | 
+          cd src
+          cd Permissions
+          pip install pytest
+          pip install -r requirements.txt
+          python -m pytest
+      
+      - name: Sessions - Install dependencies and test
+        run: | 
+          cd src
+          cd Sessions
+          pip install pytest
+          pip install -r requirements.txt
+          python -m pytest
+      
