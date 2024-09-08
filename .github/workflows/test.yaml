@@ -4,13 +4,13 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'src/**'
-      - 'tests/**'
-  pull_request:
-    paths:
-      - 'src/**'
-      - 'tests/**'
+  #   paths:
+  #     - 'src/**'
+  #     - 'tests/**'
+  # pull_request:
+  #   paths:
+  #     - 'src/**'
+  #     - 'tests/**'
 
 jobs:
   Accounts_Unit_Tests:
