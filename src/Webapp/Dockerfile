@@ -7,4 +7,4 @@ RUN pip install -r requirements.txt
 COPY . .
 
 EXPOSE 8080
-CMD ["python", "webapp.py"]
+CMD ["python", "src/webapp.py"]

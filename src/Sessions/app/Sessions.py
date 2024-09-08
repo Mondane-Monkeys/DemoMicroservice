@@ -40,19 +40,25 @@ def index():
         response = {"message": "Hello, World From Sessions", "status": "success"}
         return jsonify(response)
     elif request.method == "POST":
-        username = request.json["username"]
-        password = request.json["password"]
+        username = request.json["username"] if "username" in request.json else ""
+        password = request.json["password"] if "password" in request.json else ""
+
         login_result_Request = requests.post(
             f"{ACCOUNTS_SERVICE_ADDRESS}/login_attempts",
             json={"username": username, "password": password},
         )
         login_result = login_result_Request.json()
+        status_code = 200
+
         if "status" in login_result and login_result["status"] == "ok":
             login_result["session_key"] = (
                 create_session_key()
             )  # should be returned as a cookie
-            return login_result
-        return login_result
+        else:
+            status_code = 400
+
+        return login_result, status_code
+
     else:
         return jsonify({"status": "error", "message": "Request not supported"})
 

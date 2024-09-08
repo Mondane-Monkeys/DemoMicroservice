@@ -40,20 +40,6 @@ def index():
     return jsonify(response)
 
 
-# @app.route('/login', methods=['POST'])  # Not ideal HTTP naming conventions
-# def login():
-#    response = {
-#       "message": "Login Failed: Invalid Credentials",
-#       "status": "error"
-#    }
-#    data = request.get_json()
-#    if  'username' in data and 'password' in data and data["username"] == 'admin' and data['password'] == 'admin':
-#       response['message'] = "Welcome to the demo project!"
-#       response['status'] = "ok"
-
-#    return jsonify(response)
-
-
 @app.route("/accounts/login_attempts", methods=["POST"])
 def login():
     global attempt_count
