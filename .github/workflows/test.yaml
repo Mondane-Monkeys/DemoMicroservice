@@ -31,4 +31,4 @@ jobs:
           cd Accounts
           pip install pytest
           pip install -r requirements.txt
-          pytest
+          python -m pytest
